@@ -142,7 +142,7 @@ function renderPost(post) {
     // === Skapar knappar ===
     // ============================================================
 
-
+    //skapar en div som samlar alla knappar
     const buttonBox = document.createElement('div')
     buttonBox.classList.add('button-box')
 
@@ -179,6 +179,7 @@ function renderPost(post) {
     dislikeCount.style.marginLeft = '0.5rem'
     dislikeButton.appendChild(dislikeCount)
 
+    //lägger in alla knappar i buttonBox
     buttonBox.appendChild(commentButton)
     buttonBox.appendChild(likeButton)
     buttonBox.appendChild(dislikeButton)
@@ -292,12 +293,13 @@ function renderPost(post) {
 
     likeButton.addEventListener('click', function() {
         if (likeOrDislike === 'like') 
-            return  //return om redan gillat
+            return  //redan gillat -> gör inget 
 
         if (likeOrDislike === 'dislike') {
             post.dislikes--  //ta bort ogilla om tidigare ogillat
             dislikeCount.textContent = post.dislikes //uppdaterar visning
-            //nollställer dislikeknappens 'style'
+
+        //nollställer dislikeknappens stil
         dislikeButton.style.color = '';
         dislikeButton.style.border = '';
         dislikeButton.style.boxShadow = '';
@@ -310,15 +312,16 @@ function renderPost(post) {
         likeButton.style.border = 'solid lightgreen'
         likeButton.style.boxShadow = '0 0.6rem 1.2rem 0 rgba(95, 89, 89, 0.2)'
 
-        likeOrDislike = 'like'
-        savePost(post)
+        likeOrDislike = 'like' //sparar status så att man inte kan gilla igen 
+        savePost(post) //uppdaterar i localStorage
     })
 
     dislikeButton.addEventListener('click', function() {
-        if (likeOrDislike === 'dislike') return //redan ogillat -> gör inget 
+        if (likeOrDislike === 'dislike') 
+            return //redan ogillat -> gör inget 
 
         if (likeOrDislike === 'like') {
-            post.likes-- //ta bort like om tidigare gillat
+            post.likes-- //tar bort like om användaren tidigare har gillat
             likeCount.textContent = post.likes
 
             likeButton.style.color = '';
