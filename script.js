@@ -147,7 +147,7 @@ function renderPost(post) {
     buttonBox.classList.add('button-box')
 
     const deleteButton = document.createElement('button')
-    deleteButton.textContent = 'Delete'
+    deleteButton.textContent = 'Radera'
     deleteButton.classList.add('delete-btn') 
     deleteButton.classList.add('button-form')
 
@@ -377,7 +377,7 @@ function renderComments(comment, commentsContainer) {
     timeElement.textContent = 'Kommentar skickad: ' + comment.tid
 
     const deleteCommentButton = document.createElement('button')
-    deleteCommentButton.textContent = 'Delete'
+    deleteCommentButton.textContent = 'Radera'
     deleteCommentButton.classList.add('delete-btn')
     deleteCommentButton.classList.add('button-form')
 
