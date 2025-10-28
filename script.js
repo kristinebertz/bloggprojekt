@@ -48,17 +48,22 @@ function getPosts() { //inga parametrar behövs då allt hämtas från localStor
 }
 
 
-//Spara nya inlägg
+//Spara nya inlägg (lagt till en if-sats för att undvika att få dubbletter i localStorage, samma inlägg sparades flera gånger)
 function savePost(post) {
-    let posts = getPosts() //Hämtar in redan sparade inlägg - returnerar en array med inläggsobjekt
-    const index = posts.findIndex(p => p.id === post.id) //letar i arrayen efter inlägg med samma id som det inlägg som skickades in
-    if (index !== -1) { //om inlägget inte har index -1 betyder det att inlägget finns i localStorage - då vill vi uppdatera det i arrayen
+
+    let posts = getPosts() //Hämtar in redan sparade inlägg - getPosts returnerar en array med inläggsobjekt
+
+    const index = posts.findIndex(p => p.id === post.id) //letar i arrayen efter inlägg med samma id som det inlägg som skickades in och returnerar indexpositionen
+                                                        //om inget inlägg med samma id hittas returneras -1
+
+    if (index !== -1) { //om inlägget inte har index -1 betyder det att inlägget finns i localStorage - då vill vi uppdatera det befintliga inlägget
         posts[index] = post //genom att skriva över det gamla inlägget på den platsen i arrayen
     } else {
-        posts.push(post)      //Lägger till det som ett nytt inlägg
+        posts.push(post)      //Om inlägget inte fanns sen tidigare, lägg till det som ett nytt inlägg
     }
-    localStorage.setItem('posts', JSON.stringify(posts)) //Sparar tillbaka i localStorage  
-}
+
+    localStorage.setItem('posts', JSON.stringify(posts)) //Sparar hela arrayen med uppdateringar tillbaka i localStorage  
+}                           //eftersom localStorage bara kan lagra text görs arrayen om till en JSON-sträng
 
 // ============================================================
 // === Spara kommentarer ===
@@ -112,7 +117,7 @@ function renderPost(post) {
         titleAllComments.classList.remove('hidden')
     }
     
-    //skickar varje kommentar till renderComments som visar dom på sidan
+    //skickar varje kommentar till renderComments som visar kommentarerna på sidan
     postComments.forEach(comment => renderComments(comment, commentsContainer))
         
 

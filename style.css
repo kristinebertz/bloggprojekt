@@ -11,15 +11,15 @@ body {
     padding: 0;
     line-height: 1.6;
     font-family: Arial, Helvetica, sans-serif;
-    background-image: url(field.jpg);
+    background-color: rgb(239, 237, 237);
     background-position: center;
     background-size: contain;
     background-attachment: fixed;
 }
 
 header {
-    background-color: rgb(33, 27, 27);
-    padding: 0.3rem;
+    background-color: rgba(33, 27, 27);
+    padding: 0.1rem;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 1.7rem;
     color: rgb(255, 255, 255);
@@ -61,7 +61,6 @@ header {
 .form-group {
     display: flex;
     flex-direction: column;
-    margin-bottom: 0.1rem;
     margin-top: 1rem;
 }
 
